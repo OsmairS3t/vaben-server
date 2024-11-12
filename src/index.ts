@@ -10,6 +10,7 @@ import tipoSituacaoRoutes from './routes/tiposSituacao'
 
 const app: Application = express();
 const PORT = process.env.APP_PORT;
+app.use(express.json());
 
 app.use('/usuarios', userRoutes);
 app.use('/tiposusuario', tipoUsuarioRoutes);
