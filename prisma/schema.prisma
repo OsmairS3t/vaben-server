@@ -8,15 +8,65 @@ datasource db {
 }
 
 model usuarios {
-  id                 Int      @id @default(autoincrement())
-  nome               String?
-  email              String   @unique
-  categoria          String
-  celular            String
-  cnpj_cpf           String
-  codparc            Int
-  emite_cartao       Boolean  @default(false)
-  situacao           String
-  data_criacao       DateTime @default(now())
-  ultima_atualizacao DateTime @default(now())
+  id           Int      @id @default(autoincrement())
+  nomeusuario  String   @unique
+  senha        String
+  contacesso   Int
+  ultimoacesso DateTime @default(now())
+}
+
+model associados {
+  id           Int      @id @default(autoincrement())
+  nome         String
+  email        String   @unique
+  tipo         Int
+  categoria    Int
+  celular      String
+  cpfcnpj      String
+  razaosocial  String
+  nomefantasia String
+  codparc      Int
+  emitecartao  Boolean
+  situacao     String
+  endereco     String
+  segmento     String
+  vigencia     String
+  datavigencia DateTime
+}
+
+model tiposusuario {
+  id        Int    @id @default(autoincrement())
+  descricao String
+}
+
+model categoriasusuario {
+  id        Int    @id @default(autoincrement())
+  descricao String
+}
+
+model beneficiarios {
+  id           Int    @id @default(autoincrement())
+  codassociado Int
+  nome         String
+  categoria    Int
+}
+
+model segmentosconvenio {
+  id        Int    @id @default(autoincrement())
+  descricao String
+}
+
+model convenios {
+  id       Int @id @default(autoincrement())
+  segmento Int
+}
+
+model tipossituacao {
+  id        Int    @id @default(autoincrement())
+  descricao String
+}
+
+model tiposvigencia {
+  id        Int    @id @default(autoincrement())
+  descricao String
 }

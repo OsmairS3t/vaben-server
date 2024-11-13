@@ -1,6 +1,8 @@
 import { prisma } from './prismaClient';
 import { Router, Request, Response } from 'express'
 import { IUsuario } from "utils/interface";
+import { hashPassword, verifyPassword } from '../utils/authService';
+
 const router = Router();
 
 router.get('/', async(req: Request, res: Response) => {
@@ -13,8 +15,16 @@ router.get('/', async(req: Request, res: Response) => {
 })
 
 router.post('/', async(req: Request, res: Response) => {
-  const usuario:IUsuario = req.body
-  const user = await prisma.usuarios.create({ data: usuario })
+  const { nomeusuario, senha, contacesso, ultimoacesso }:IUsuario = req.body
+  const novasenha = await hashPassword(senha);
+  const user = await prisma.usuarios.create({ 
+    data: {
+      nomeusuario,
+      senha: novasenha, 
+      contacesso, 
+      ultimoacesso
+    }
+  })
   res.send(user)
 })
 
@@ -23,14 +33,7 @@ router.put('/', async(req: Request, res: Response) => {
   const user = await prisma.usuarios.update({ 
     where: {id: usuario.id },
     data: {
-      nome: usuario.nome,
-      email: usuario.email,
-      categoria: usuario.categoria,
-      celular: usuario.celular,
-      cnpj_cpf: usuario.cnpj_cpf,
-      codparc: usuario.codparc,
-      emite_cartao: usuario.emite_cartao,
-      situacao: usuario.situacao
+      nomeusuario: usuario.nomeusuario,
     },
   })
   res.send(user)

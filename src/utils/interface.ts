@@ -1,6 +1,6 @@
 export interface ITipoUsuario {
   id: number;
-  tipo: string;
+  descricao: string;
 }
 
 export interface ICategoriaUsuario {
@@ -10,24 +10,54 @@ export interface ICategoriaUsuario {
 
 export interface IUsuario {
   id: number;
+  nomeusuario: string;
+  senha: string;
+  contacesso: number;
+  ultimoacesso: Date;
+}
+
+export interface IAssociado {
+  id: number;
   nome:string;
   email: string;
-  categoria: string;
+  tipo: number;
+  categoria: number;
   celular: string;
-  cnpj_cpf: string;
+  cpfcnpj: string;
+  razaosocial: string;
+  nomefantasia: string;
   codparc: number;
-  emite_cartao: boolean;
+  emitecartao: boolean;
   situacao: string;
+  endereco: string;
+  segmento: string;
+  vigencia: string;
+  datavigencia: Date;
+}
+
+export interface IBeneficiario {
+  id: number;
+  codassociado: number;
+  nome: string;
+  categoria: number;
 }
 
 export interface ISegmentoConvenio {
+  id: number;
+  descricao: string;
 }
 
 export interface IConvenio {
+  id: number;
+  segmento: string;
 }  
 
 export interface ITipoSituacao {
+  id: number;
+  descricao: string;
 }
 
 export interface ITipoVigencia {
+  id: number;
+  descricao: string;
 }
