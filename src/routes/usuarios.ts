@@ -1,9 +1,28 @@
 import { prisma } from './prismaClient';
 import { Router, Request, Response } from 'express'
 import { IUsuario } from "utils/interface";
-import { hashPassword, verifyPassword } from '../utils/authService';
+import { hashPassword, verifyPassword, loginUser } from '../core/authService';
 
 const router = Router();
+
+router.get('/login', async(req: Request, res: Response) => {
+  try {
+    const { nomeusuario, senha } = req.body
+    const senhaBanco = await prisma.usuarios.findFirst({ where: { 'nomeusuario': nomeusuario }})
+    if (senhaBanco) {
+      const loggedUser = await verifyPassword(senha, senhaBanco.senha)
+      if (loggedUser) {
+        res.status(200).json({message: 'Usuário logado com sucesso.'})
+      } else {
+        res.status(401).json({message: 'Usuário ou Senha não conferem.'})
+      }
+    } else {
+      res.status(404).json({message: 'Usuário não encontrado.'})
+    }
+  } catch (error) {
+    console.log(error)
+  }
+})
 
 router.get('/', async(req: Request, res: Response) => {
   try {

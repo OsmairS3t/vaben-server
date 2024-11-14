@@ -9,7 +9,7 @@ datasource db {
 
 model usuarios {
   id           Int      @id @default(autoincrement())
-  nomeusuario  String   @unique
+  nome         String
   senha        String
   contacesso   Int
   ultimoacesso DateTime @default(now())
@@ -32,6 +32,10 @@ model associados {
   segmento     String
   vigencia     String
   datavigencia DateTime
+  usuario      String   @unique
+  senha        String
+  contacesso   Int
+  ultimoacesso DateTime @default(now())
 }
 
 model tiposusuario {
