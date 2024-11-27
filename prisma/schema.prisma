@@ -7,14 +7,6 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model usuarios {
-  id           Int      @id @default(autoincrement())
-  nome         String
-  senha        String
-  contacesso   Int
-  ultimoacesso DateTime @default(now())
-}
-
 model associados {
   id           Int      @id @default(autoincrement())
   nome         String
@@ -24,7 +16,7 @@ model associados {
   celular      String
   cpfcnpj      String
   razaosocial  String
-  nomefantasia String
+  nomeparceiro String
   codparc      Int
   emitecartao  Boolean
   situacao     String
@@ -36,6 +28,12 @@ model associados {
   senha        String
   contacesso   Int
   ultimoacesso DateTime @default(now())
+}
+
+model convenios {
+  id       Int    @id @default(autoincrement())
+  segmento Int
+  nome     String
 }
 
 model tiposusuario {
@@ -58,11 +56,6 @@ model beneficiarios {
 model segmentosconvenio {
   id        Int    @id @default(autoincrement())
   descricao String
-}
-
-model convenios {
-  id       Int @id @default(autoincrement())
-  segmento Int
 }
 
 model tipossituacao {

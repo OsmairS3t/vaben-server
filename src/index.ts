@@ -16,9 +16,9 @@ app.use('/usuarios', userRoutes);
 app.use('/tiposusuario', tipoUsuarioRoutes);
 app.use('/categoriasusuario', categoriaUsuarioRoutes);
 app.use('convenios', convenioRoutes)
-app.use('segmentosconvenio', segmentoConvenioRoutes)
-app.use('tiposvigencia', tipoVigenciaRoutes)
-app.use('tipossituacao', tipoSituacaoRoutes)
+app.use('/segmentosconvenio', segmentoConvenioRoutes)
+app.use('/tiposvigencia', tipoVigenciaRoutes)
+app.use('/tipossituacao', tipoSituacaoRoutes)
 
 app.listen(PORT, () => {
   console.log(`Servidor rodando na porta ${PORT}`)

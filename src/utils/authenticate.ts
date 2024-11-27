@@ -1,9 +1,7 @@
 import bcrypt from 'bcrypt';
 
-const saltRounds = 10;
-
 // Função para gerar o hash da senha
-export async function hashPassword(password: string): Promise<string> {
+export async function hashPassword(password: string, saltRounds: number): Promise<string> {
   const salt = await bcrypt.genSalt(saltRounds);
   const hashedPassword = await bcrypt.hash(password, salt);
   return hashedPassword;
